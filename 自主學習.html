@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>猜數字小遊戲</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .game-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            font-size: 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4a6cf7;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3a5be0;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 16px;
+            min-height: 24px;
+        }
+
+        #count {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game-box">
+        <h2>猜數字遊戲</h2>
+        <p>請猜 1 ～ 100 的整數</p>
+
+        <input type="number" id="guessInput" placeholder="輸入數字">
+        <br>
+        <button onclick="checkGuess()">猜看看</button>
+
+        <div id="message"></div>
+        <div id="count"></div>
+    </div>
+
+    <script>
+        // 產生 1~100 的隨機答案
+        let answer = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = Number(document.getElementById("guessInput").value);
+            attempts++;
+
+            if (guess < 1 || guess > 100) {
+                document.getElementById("message").innerText = "請輸入 1 到 100 的數字";
+                return;
+            }
+
+            if (guess > answer) {
+                document.getElementById("message").innerText = "太大了！";
+            } else if (guess < answer) {
+                document.getElementById("message").innerText = "太小了！";
+            } else {
+                document.getElementById("message").innerText =
+                    "🎉 恭喜答對！答案是 " + answer;
+            }
+
+            document.getElementById("count").innerText =
+                "嘗試次數：" + attempts + " 次";
+        }
+    </script>
+
+</body>
+
+</html>
